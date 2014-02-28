@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :redirect_if_signed_in
 
   def new
     @user = User.new
@@ -6,8 +7,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
+      sign_in(@user)
       redirect_to goals_url
     else
       flash.now[:errors] = @user.errors.full_messages
