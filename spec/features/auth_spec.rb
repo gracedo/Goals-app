@@ -11,7 +11,6 @@ feature "the signup process" do
 
   feature "signing up a user" do
     before(:each) do
-      visit new_user_url
       fill_in 'username', with: "test"
       fill_in 'password', with: "password"
       click_on "Create User"
@@ -52,7 +51,6 @@ feature "logging in" do
 end
 
 feature "logging out" do
-
   it "begins with logged out state" do
     visit new_user_url
     expect(page).not_to have_content "Hello"

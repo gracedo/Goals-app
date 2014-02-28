@@ -12,4 +12,15 @@
 #
 
 class Goal < ActiveRecord::Base
+  validates :name, :user_id, presence: true
+  validates :completed, :public, inclusion: { in: [true, false] }
+
+  belongs_to :user,
+             :primary_key => :id,
+             :foreign_key => :user_id,
+             :class_name => "User"
+             # :inverse_of => :user
+
+  private
+
 end

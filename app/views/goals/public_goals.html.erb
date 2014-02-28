@@ -1,0 +1,18 @@
+<h1>All Users' Goals</h1>
+
+<!-- List all users' public goals -->
+<h3>Incomplete Goals</h3>
+
+<ul>
+	<% @goals.where(completed: false).each do |goal| %>
+		<li><%= goal.name %></li>
+	<% end %>
+</ul>
+
+<h3>Completed Goals</h3>
+
+<ul>
+	<% @goals.where(completed: true).each do |goal| %>
+		<li><%= goal.name %></li>
+	<% end %>
+</ul>

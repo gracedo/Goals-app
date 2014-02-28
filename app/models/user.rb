@@ -17,6 +17,12 @@ class User < ActiveRecord::Base
   before_validation :ensure_session_token
   attr_reader :password
 
+  has_many :goals,
+           :primary_key => :id,
+           :foreign_key => :user_id,
+           :class_name => "Goal"
+           # :inverse_of => :goal
+
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
   end
