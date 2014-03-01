@@ -21,6 +21,23 @@
 	<% end %>
 </ul>
 
-
 <%= link_to "Create a goal", new_user_goal_url(@user) %>
 
+
+<h3>Comments</h3>
+
+<% @user_comments.each do |comment| %>
+	<p><%= comment.body %><br>
+	Posted by <%= comment.poster.username %> at <%= comment.created_at %><br>
+	<%= button_to "Delete Comment", user_user_comment_url(@user, comment), method: :delete %></p>
+<% end %>
+
+<h4>Add Comment</h4>
+<form action="<%= user_user_comments_url(@user) %>" method="POST" accept-charset="utf-8">
+
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+	<input type="text" name="user_comment[body]" id="comment">
+
+	<p><input type="submit" value="Add Comment"></p>
+</form>

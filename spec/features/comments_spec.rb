@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "comment creation" do
+feature "comments" do
   before(:each) do
     visit new_user_url
     fill_in 'username', with: "test"
@@ -17,6 +17,13 @@ feature "comment creation" do
       fill_in "comment", with: "You can do it!!!!!!!!!!!!!!!!!"
       click_on("Add Comment")
       expect(page).to have_content("You can do it!!!!!!!!!!!!!!!!!")
+    end
+
+    it "deletes comments" do
+      fill_in "comment", with: "You can do it!!!!!!!!!!!!!!!!!"
+      click_on("Add Comment")
+      click_on "Delete Comment"
+      expect(page).not_to have_content "You can do it!!!!!!!!!!!!!!!!!"
     end
   end
 
@@ -35,6 +42,13 @@ feature "comment creation" do
       fill_in "comment", with: "You can do it!!!!!!!!!!!!!!!!!"
       click_on("Add Comment")
       expect(page).to have_content("You can do it!!!!!!!!!!!!!!!!!")
+    end
+
+    it "deletes comments" do
+      fill_in "comment", with: "You can do it!!!!!!!!!!!!!!!!!"
+      click_on("Add Comment")
+      click_on "Delete Comment"
+      expect(page).not_to have_content "You can do it!!!!!!!!!!!!!!!!!"
     end
   end
 end

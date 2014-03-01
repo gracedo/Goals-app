@@ -4,6 +4,7 @@ class GoalsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @goals = @user.goals
+    @user_comments = @user.user_comments
     render :index
   end
 
@@ -15,11 +16,16 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.new(goal_params)
 
     if @goal.save
-      redirect_to user_goals_url(current_user)
+      redirect_to user_goal_url(current_user, @goal)
     else
       flash.now[:errors] = @goal.errors.full_messages
       render :new
     end
+  end
+
+  def show
+    @goal = Goal.find(params[:id])
+    @goal_comments = @goal.goal_comments
   end
 
   def edit

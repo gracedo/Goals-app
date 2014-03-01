@@ -19,7 +19,8 @@ class Goal < ActiveRecord::Base
              :primary_key => :id,
              :foreign_key => :user_id,
              :class_name => "User"
-             # :inverse_of => :user
+
+  has_many :goal_comments
 
   private
 

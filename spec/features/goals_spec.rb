@@ -16,6 +16,7 @@ feature 'goals index page' do
     click_on "Create a goal"
     fill_in "name", with: "Eat Lunch"
     click_on("Create Goal")
+    click_on "Back to all goals"
     click_on "\u2713"
 
     page.find('#completed_goals').should have_text("Eat Lunch")
@@ -31,6 +32,7 @@ feature 'public goals index page' do
     click_on "Create a goal"
     fill_in "name", with: "Eat Lunch"
     click_on("Create Goal")
+    click_on("Back to all goals")
     click_on "Create a goal"
     fill_in "name", with: "Eat Dinner"
     choose "Private"
@@ -67,11 +69,12 @@ feature 'goal creation process' do
       click_on("Create Goal")
     end
 
-    it "redirects to goal's index page" do
+    it "redirects to goal's show page" do
       expect(page).to have_content("Eat Lunch")
     end
 
     it "should be public by default" do
+      click_on "Back to all goals"
       expect(page).to have_content("public")
     end
   end

@@ -21,7 +21,21 @@ class User < ActiveRecord::Base
            :primary_key => :id,
            :foreign_key => :user_id,
            :class_name => "Goal"
-           # :inverse_of => :goal
+
+  has_many :user_comments,
+           :primary_key => :id,
+           :foreign_key => :user_id,
+           :class_name => "UserComment"
+
+  has_many :posted_user_comments,
+           :primary_key => :id,
+           :foreign_key => :poster_id,
+           :class_name => "UserComment"
+
+  has_many :posted_goal_comments,
+           :primary_key => :id,
+           :foreign_key => :poster_id,
+           :class_name => "GoalComment"
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
